@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using Microsoft.Azure.Cosmos;
+using MoviesMicroService.Models;
+using System.Linq;
 
 namespace MoviesMicroService
 {
@@ -22,24 +24,47 @@ namespace MoviesMicroService
             this.movieContainer = movieContainer;
         }
 
-        [FunctionName("Function1")]
+        [FunctionName("GetMovies")]
         public async Task<IActionResult> Run(
-            [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+             ILogger log)
         {
-            log.LogInformation("C# HTTP trigger function processed a request.");
+            try
+            {
+                log.LogInformation("Movie function started execution");
+                var responseMessage = movieContainer.GetItemLinqQueryable<Movie>(true).AsEnumerable().ToList();
 
-            string name = req.Query["name"];
+                return new OkObjectResult(responseMessage);
+            }
+            catch (Exception e)
+            {
+                log.LogInformation(" Exception while executing Movie function ");
+                return new BadRequestResult();
+            }
+        }
 
-            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+        [FunctionName("GetMovieById")]
+        public async Task<IActionResult> GetMovieById(
+          [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
+          ILogger log)
+        {
+            try
+            {
+                log.LogInformation("Movie function started execution");
+                string id = req.Query["id"];
+                Movie movie = movieContainer.GetItemLinqQueryable<Movie>(true)
+                       .Where(b => b.imdbID == id)
+                       .AsEnumerable()
+                       .FirstOrDefault();
 
-            string responseMessage = string.IsNullOrEmpty(name)
-                ? "This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response."
-                : $"Hello, {name}. This HTTP triggered function executed successfully.";
+                return new OkObjectResult(movie);
+            }
+            catch (Exception e)
+            {
 
-            return new OkObjectResult(responseMessage);
+                log.LogInformation(" Exception while executing Movie function ");
+                return new BadRequestResult();
+            }
         }
     }
 }
