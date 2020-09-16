@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30413.136
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesMicroService", "MoviesMicroService.csproj", "{60F59E0C-49D3-4B78-B518-168D243B721E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesMicroServiceTests", "..\MoviesMicroServiceTests\MoviesMicroServiceTests.csproj", "{74E02AB6-692D-4FEA-A481-2B7BEAA210F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{60F59E0C-49D3-4B78-B518-168D243B721E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60F59E0C-49D3-4B78-B518-168D243B721E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60F59E0C-49D3-4B78-B518-168D243B721E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60F59E0C-49D3-4B78-B518-168D243B721E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74E02AB6-692D-4FEA-A481-2B7BEAA210F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74E02AB6-692D-4FEA-A481-2B7BEAA210F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74E02AB6-692D-4FEA-A481-2B7BEAA210F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74E02AB6-692D-4FEA-A481-2B7BEAA210F2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {23985EBE-62EA-4BE0-B41D-76700AC9C0AC}
+	EndGlobalSection
+EndGlobal
